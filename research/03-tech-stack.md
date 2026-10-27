@@ -26,13 +26,13 @@
 | 의존성 고정 | requirements.txt `==` 고정 | `bulk_restore`와 같음 |
 | 훅 | pre-commit, Clumio `pre-push-hooks` | Clumio 레포에서 그대로 씀 |
 | CI | GitHub Actions | `bulk_restore`의 단계 순서(lint → mypy → format-check → test) 그대로 |
+| 의존성 업데이트 | dependabot (pip, github-actions 주 1회) | `clumio-python-sdk`가 씀. `bulk_restore`에는 없음. 회사가 쓰는 도구를 직접 써 보려고 넣음 |
 | 배포 | CloudFormation | `bulk_restore`가 CloudFormation 한 장으로 배포함 |
 
 ## 고르지 않은 것
 
 - uv를 프로젝트 관리 도구로 쓰는 것: `clumio-terraform-mcp`는 uv를 쓰지만 `bulk_restore`는 pip와 requirements를 씀. 자동화 레포인 `bulk_restore`를 따름. 로컬에서 가상 환경과 Python 설치에만 uv를 씀
 - gray 포맷터: `bulk_restore`의 pre-commit에 있지만 ruff format과 하는 일이 겹침
-- dependabot 버전 업데이트: `clumio-python-sdk`는 쓰지만, 봇 PR을 머지하면 커밋 작성자가 봇이 됨. 이 레포는 모든 커밋을 소유자 계정으로 남기기로 해서 끔. 취약점 알림만 켜 둠
 - Go: 첫 버전에서는 쓰지 않음. 확장 단계에서 체크섬 검증기를 Go로 만들지 고민 중
 
 ## 출처
