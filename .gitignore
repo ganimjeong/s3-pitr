@@ -1,0 +1,32 @@
+.DS_Store
+.idea
+.vscode
+build
+
+# 바이너리는 저장소에 넣지 않음. 필요하면 S3 같은 별도 저장소에 둠.
+*.a
+*.dll
+*.dmg
+*.exe
+*.jar
+*.log
+*.log.*
+*.o
+*.so
+*.tar
+*.tar.*
+*.tgz
+*.whl
+*.zip
+
+# Python
+.coverage
+.coverage.*
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.venv
+__pycache__
+dist
+*.pyc
+*.egg-info

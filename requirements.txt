@@ -1,0 +1,4 @@
+# 실행 의존성.
+# pip install -r requirements.txt
+
+boto3==1.43.119

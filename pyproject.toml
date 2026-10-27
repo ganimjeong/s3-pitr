@@ -1,0 +1,94 @@
+#
+# Copyright 2026 Ajin Jeong.
+#
+# 설치용 패키지가 아니라 개발 도구 설정을 한곳에 모으려고 둔 파일임.
+# 의존성은 requirements.txt, requirements-dev.txt가 정본임.
+
+[project]
+name = 's3-pitr'
+description = 'S3 버킷 증분 백업과 시점 복구, 그 검증을 위한 시험 자동화'
+readme = 'README.md'
+authors = [ {name = 'Ajin Jeong'} ]
+dynamic = ['version', 'dependencies', 'optional-dependencies']
+requires-python = '>=3.12'
+
+
+[tool.setuptools.dynamic]
+version = {file = ['VERSION']}
+dependencies = {file = ['requirements.txt']}
+optional-dependencies.dev = { file = ['requirements-dev.txt'] }
+
+
+[tool.coverage.run]
+branch = true
+# 서드파티 패키지가 커버리지에 섞이지 않게 함.
+source = ['s3pitr']
+omit = ['s3pitr/test/*']
+
+
+[tool.coverage.report]
+exclude_lines = [
+    'pragma: no cover',
+    'if __name__ == .__main__.:',
+    'if TYPE_CHECKING:',
+]
+
+[tool.ruff]
+exclude = [
+    '.git',
+    '.mypy_cache',
+    '.pytest_cache',
+    '.ruff_cache',
+    '.venv',
+    'build',
+    'dist',
+]
+target-version = 'py312'
+indent-width = 4
+line-length = 100
+
+[tool.ruff.format]
+# Black과 달리 홑따옴표를 씀.
+quote-style = 'single'
+indent-style = 'space'
+skip-magic-trailing-comma = false
+line-ending = 'auto'
+
+
+[tool.ruff.lint]
+select = ['D', 'I', 'PL', 'S', 'W', 'UP']
+
+# Google 규칙 위에 아래 항목만 끔.
+ignore = [
+    'D101',  # 공개 클래스 독스트링. 예외 클래스까지 강제하면 소음이 큼.
+    'D102',  # 공개 메서드 독스트링. 같은 이유.
+    'D104',  # 패키지 독스트링. 빈 __init__.py에도 독스트링이 필요해짐.
+    'D107',  # __init__ 독스트링. 클래스 독스트링으로 충분함.
+    'D410',  # 섹션 뒤 빈 줄.
+    'D411',  # 섹션 앞 빈 줄.
+]
+
+
+[tool.ruff.lint.pydocstyle]
+convention = 'google'
+
+
+[tool.ruff.lint.isort]
+lines-after-imports = -1
+
+[tool.ruff.lint.per-file-ignores]
+# 시험 코드는 독스트링 규칙과 assert 금지 규칙을 뺌.
+'*/test/test_*.py' = ['D', 'S101', 'PLR2004']
+'e2e/*.py' = ['D', 'S101', 'PLR2004']
+
+[tool.mypy]
+python_version = '3.12'
+namespace_packages = true
+ignore_missing_imports = true
+follow_imports = 'silent'
+show_column_numbers = true
+disallow_untyped_defs = true
+exclude = ['^build/', '^dist/', '^\.venv/']
+
+[tool.pytest.ini_options]
+testpaths = ['e2e']

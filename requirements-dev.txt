@@ -1,0 +1,15 @@
+#
+# 개발 의존성. pip install -r requirements-dev.txt
+#
+
+-r requirements.txt
+# 스텁은 requirements.txt의 boto3 버전과 맞춤.
+boto3-stubs[dynamodb,s3]==1.43.119
+coverage==7.17.0
+green==4.0.2
+moto[dynamodb,s3,server]==5.2.4
+mypy==2.4.0
+pre-commit==4.7.0
+pytest==9.1.1
+ruff==0.17.3
+yamllint==1.38.0
