@@ -32,6 +32,7 @@
 
 - uv를 프로젝트 관리 도구로 쓰는 것: `clumio-terraform-mcp`는 uv를 쓰지만 `bulk_restore`는 pip와 requirements를 씀. 자동화 레포인 `bulk_restore`를 따름. 로컬에서 가상 환경과 Python 설치에만 uv를 씀
 - gray 포맷터: `bulk_restore`의 pre-commit에 있지만 ruff format과 하는 일이 겹침
+- dependabot 버전 업데이트: `clumio-python-sdk`는 쓰지만, 봇 PR을 머지하면 커밋 작성자가 봇이 됨. 이 레포는 모든 커밋을 소유자 계정으로 남기기로 해서 끔. 취약점 알림만 켜 둠
 - Go: 첫 버전에서는 쓰지 않음. 확장 단계에서 체크섬 검증기를 Go로 만들지 고민 중
 
 ## 출처

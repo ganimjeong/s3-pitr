@@ -28,7 +28,7 @@ repos:
     # requirements-dev.txt의 ruff 버전과 맞춤.
     rev: v0.17.3
     hooks:
-      - id: ruff
+      - id: ruff-check
         stages: [pre-commit]
       - id: ruff-format
         stages: [pre-commit]
