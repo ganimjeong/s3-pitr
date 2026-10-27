@@ -26,6 +26,7 @@
 | 의존성 고정 | requirements.txt `==` 고정 | `bulk_restore`와 같음 |
 | 훅 | pre-commit, Clumio `pre-push-hooks` | Clumio 레포에서 그대로 씀 |
 | CI | GitHub Actions | `bulk_restore`의 단계 순서(lint → mypy → format-check → test) 그대로 |
+| 의존성 업데이트 | dependabot (pip, github-actions 주 1회) | `clumio-python-sdk`가 씀. `bulk_restore`에는 없음. 회사가 쓰는 도구를 직접 써 보려고 넣음 |
 | 배포 | CloudFormation | `bulk_restore`가 CloudFormation 한 장으로 배포함 |
 
 ## 고르지 않은 것
