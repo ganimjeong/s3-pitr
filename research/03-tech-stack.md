@@ -6,9 +6,9 @@
 | --- | --- | --- |
 | `bulk_restore` | Python 3.12 | boto3, Clumio Python SDK, Ruff, mypy, green, coverage, pre-commit, yamllint, CloudFormation, Lambda, Step Functions |
 | `bulk_onboarding` | Python | Makefile, CloudFormation StackSet |
-| `clumio-python-sdk` | Python | pydantic 모델, mypy, SonarCloud, dependabot, 자동 릴리스 |
+| `clumio-python-sdk` | Python | pydantic 모델, mypy, SonarCloud, 자동 릴리스 |
 | `clumio-terraform-mcp` | Python 3.12 | uv, fastmcp, pytest |
-| `terraform-provider-clumio` | Go | golangci-lint, goreleaser, mockery |
+| `terraform-provider-clumio` | Go | golangci-lint, goreleaser, mockery, dependabot(github-actions, gomod 주 1회) |
 | `clumio-go-sdk` | Go | 봇이 API 정의로 생성 |
 
 공고 문장 기준 언어는 Python, Go가 같이 나옴. 자동화 쪽은 Python이 중심이고 백엔드는 Go, Java, Python을 다 언급함.
@@ -26,8 +26,15 @@
 | 의존성 고정 | requirements.txt `==` 고정 | `bulk_restore`와 같음 |
 | 훅 | pre-commit, Clumio `pre-push-hooks` | Clumio 레포에서 그대로 씀 |
 | CI | GitHub Actions | `bulk_restore`의 단계 순서(lint → mypy → format-check → test) 그대로 |
-| 의존성 업데이트 | dependabot (pip, github-actions 주 1회) | `clumio-python-sdk`가 씀. `bulk_restore`에는 없음. 회사가 쓰는 도구를 직접 써 보려고 넣음 |
+| 의존성 업데이트 | dependabot (pip, github-actions 주 1회), 반영은 사람이 직접 | 아래 dependabot 운영 절 참고 |
 | 배포 | CloudFormation | `bulk_restore`가 CloudFormation 한 장으로 배포함 |
+
+## dependabot 운영 [공개]
+
+- `clumio-code`에서 `dependabot.yml`이 있는 레포는 `terraform-provider-clumio` 하나임. `bulk_restore`, `bulk_onboarding`, `clumio-python-sdk`, `clumio-go-sdk`, `terraform-clumio-gcp-template`에는 없음
+- `terraform-provider-clumio`의 dependabot PR 9개 중 머지된 것은 0개. 5개는 열려 있고 4개는 머지 없이 닫힘 (2026-10-27 기준)
+- main 이력(최근 100개)의 작성자는 전부 사람 계정임. 의존성 업데이트는 사람이 올리는 `Release 0.x.y` PR의 CHANGELOG에 "Updated dependencies."로 들어감
+- 이 레포도 같은 방식으로 함. 봇 PR은 새 버전 알림으로 쓰고, 반영은 소유자 계정 커밋으로 하고, 반영한 뒤 봇 PR을 닫음
 
 ## 고르지 않은 것
 
