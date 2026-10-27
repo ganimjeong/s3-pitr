@@ -1,0 +1,45 @@
+#
+# Copyright 2026 Ajin Jeong.
+#
+# Licensed under the Apache License, Version 2.0 (the "License").
+# 전문은 LICENSE 파일 참고.
+#
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # 워크플로를 디버깅할 때 손으로 돌릴 수 있게 함.
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: CI
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install
+        run: make install-dev
+      - name: lint
+        run: make lint
+      - name: mypy
+        run: make mypy
+      - name: Format check
+        run: make format-check
+      - name: Unit Tests
+        run: make test
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: build/test_reports
