@@ -1,0 +1,11 @@
+---
+extends: default
+rules:
+  line-length:
+    max: 100
+  # GitHub Actions의 on: 키를 참/거짓으로 읽지 않게 함.
+  truthy:
+    check-keys: false
+  document-start: disable
+  comments:
+    min-spaces-from-content: 1
