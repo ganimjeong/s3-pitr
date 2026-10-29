@@ -51,7 +51,8 @@ test:
 
 # 통합 시험. AWS_ENDPOINT_URL이 없으면 moto 서버를 직접 띄움.
 e2e:
-	python3 -m pytest -v
+	mkdir -p $(test_reports)
+	python3 -m pytest -v --junitxml=$(test_reports)/s3pitr-e2e.xml
 
 
 lint:
