@@ -42,10 +42,10 @@ Clumio 서울 Automation, Backend 공고와 `clumio-code` 공개 레포를 기�
 - 이점: 표준 라이브러리라 의존성이 적음. green은 병렬 실행, 커버리지, JUnit 보고서를 같이 해 줌
 - 선택 이유: `bulk_restore`와 같음
 
-### pytest + moto 서버, LocalStack (통합 시험)
+### pytest + moto 서버 (통합 시험)
 
 - 이점: 픽스처로 버킷, 테이블을 만들고 지우는 일을 시험마다 반복하지 않아도 됨
-- 선택 이유: 로컬에 Docker가 없어서 LocalStack을 못 띄움. moto는 Python 프로세스 안에서 서버로 뜨기 때문에 Docker 없이 같은 엔드포인트 방식으로 시험할 수 있음. CI에서는 LocalStack으로 한 번 더 확인함
+- 선택 이유: 로컬에 Docker가 없어서 LocalStack을 못 띄움. moto는 Python 프로세스 안에서 서버로 뜨기 때문에 Docker 없이 같은 엔드포인트 방식으로 시험할 수 있음. CI도 moto 서버로 함. LocalStack은 2026-03부터 무료 이미지도 인증 토큰이 필요해짐
 
 ## 개발 환경
 

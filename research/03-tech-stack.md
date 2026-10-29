@@ -22,7 +22,7 @@
 | 린트, 포맷 | Ruff | `bulk_restore`와 같은 규칙 묶음(`D`, `I`, `PL`, `S`, `W`, `UP`) |
 | 타입 검사 | mypy (`disallow_untyped_defs`) | `bulk_restore`와 같음. boto3 타입은 `boto3-stubs` |
 | 단위 시험 | unittest + green | `bulk_restore`와 같음 |
-| 통합 시험 | pytest + moto 서버 (로컬), LocalStack (CI) | 픽스처로 환경을 만들고 지우는 일이 많아서 pytest가 맞음 [추정] |
+| 통합 시험 | pytest + moto 서버 (로컬, CI) | 픽스처로 환경을 만들고 지우는 일이 많아서 pytest가 맞음 [추정]. LocalStack은 2026-03부터 토큰이 필요해서 뺌([06](06-testing.md)) |
 | 의존성 고정 | requirements.txt `==` 고정 | `bulk_restore`와 같음 |
 | 훅 | pre-commit, Clumio `pre-push-hooks` | Clumio 레포에서 그대로 씀 |
 | CI | GitHub Actions | `bulk_restore`의 단계 순서(lint → mypy → format-check → test) 그대로 |
