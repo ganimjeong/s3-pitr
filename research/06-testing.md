@@ -21,16 +21,23 @@
 
 - 단위 시험: `s3pitr/test/test_<모듈>.py`, unittest + green. 바깥 서비스는 moto로 흉내 냄
 - 통합 시험: `e2e/`, pytest
-  - `AWS_ENDPOINT_URL`이 있으면 그 엔드포인트(CI의 LocalStack)를 씀
+  - `AWS_ENDPOINT_URL`이 있으면 그 엔드포인트를 씀
   - 없으면 moto 서버를 시험 안에서 띄움. 로컬에 Docker가 없어도 돌아감
   - 시나리오: 데이터 생성 → 백업 → 덮어쓰기·삭제 → 다시 백업 → 시점 복구 → 체크섬 비교
 - 실패 주입: 같은 버전 두 번 처리, 중간 중단 후 재실행, 스로틀링 응답
 - 시험이 처음부터 다 통과하면 의심함. 지키려는 보장을 하나씩 일부러 깨서 시험이 잡는지 확인함
 - 커버리지는 분기 기준으로 잼
 
+## LocalStack을 CI에서 쓰지 않는 이유 [공개]
+
+- LocalStack은 2026-03-23부터 하나의 이미지로 합치면서 무료 이미지도 인증 토큰(`LOCALSTACK_AUTH_TOKEN`)을 요구함. `latest` 태그도 해당됨
+- 공개 레포 CI에 개인 토큰을 시크릿으로 넣는 것도 가능하지만, 포크에서 온 PR에는 시크릿이 전달되지 않아 시험이 돌지 않음
+- 그래서 CI도 로컬과 같이 moto 서버로 함. 실제 S3와 다른 동작은 마지막에 실제 AWS에서 한 번 확인함
+
 ## 출처
 
 - bulk_restore Makefile https://github.com/clumio-code/bulk_restore/blob/main/Makefile
 - bulk_restore test_common.py https://github.com/clumio-code/bulk_restore/blob/main/code/test/test_common.py
 - moto 서버 모드 https://docs.getmoto.org/en/latest/docs/server_mode.html
-- LocalStack GitHub Actions https://docs.localstack.cloud/user-guide/ci/github-actions/
+- LocalStack 단일 이미지 전환 https://blog.localstack.cloud/localstack-single-image-next-steps/
+- LocalStack 2026.03.0 릴리스 https://blog.localstack.cloud/localstack-for-aws-release-2026-03-0/

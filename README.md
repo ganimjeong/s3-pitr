@@ -18,8 +18,11 @@ S3 버킷을 증분 백업하고 원하는 시점의 상태로 복구하는 도�
 ```
 s3pitr/
   common.py     AWS 클라이언트 재시도 설정, 시각 문자열, 공통 예외
+  catalog.py    DynamoDB 백업 카탈로그. 조건부 쓰기로 같은 버전을 한 번만 기록
+  backup.py     증분 백업. 새 버전만 금고로 복사하고 체크섬과 함께 기록
+  envkit.py     시험용 버킷, 카탈로그 테이블 만들기와 정리
   test/         단위 시험 (unittest + green)
-e2e/            통합 시험 (pytest, moto 서버 또는 LocalStack)
+e2e/            통합 시험 (pytest, moto 서버)
 research/       구조와 규칙을 정할 때 참고한 자료
 til/            만들면서 배운 것과 시행착오 회고
 ```
