@@ -9,7 +9,7 @@ coverage==7.17.0
 # moto가 기록하는 수정 시각을 시험에서 고정함.
 freezegun==1.5.5
 green==4.0.2
-moto[dynamodb,s3,server]==5.2.4
+moto[dynamodb,s3,server]==5.2.5
 mypy==2.4.0
 pre-commit==4.7.0
 pytest==9.1.1
