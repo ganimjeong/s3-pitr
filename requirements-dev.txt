@@ -4,7 +4,7 @@
 
 -r requirements.txt
 # 스텁은 requirements.txt의 boto3 버전과 맞춤.
-boto3-stubs[dynamodb,s3]==1.43.119
+boto3-stubs[dynamodb,s3]==1.43.123
 coverage==7.17.0
 # moto가 기록하는 수정 시각을 시험에서 고정함.
 freezegun==1.5.5
