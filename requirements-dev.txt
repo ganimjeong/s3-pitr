@@ -12,6 +12,6 @@ green==4.0.2
 moto[dynamodb,s3,server]==5.2.4
 mypy==2.4.0
 pre-commit==4.7.0
-pytest==9.1.1
+pytest==9.2.0
 ruff==0.17.3
 yamllint==1.38.0
